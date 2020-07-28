@@ -16,16 +16,12 @@ class UserViewModel @ViewModelInject constructor(private var repository: UserRep
     BaseViewModel() {
 
 
-    private var retryRequest = MutableLiveData<Boolean>()
+    private var offlineDataWatcher : LiveData<PagedList<ResultX>> = repository.observeLocalPagedSets()
+    private var onlineDataWatcher : LiveData<PagedList<ResultX>> = repository.observeRemotePagedSets()
     var selectedUser = MutableLiveData<ResultX>()
 
-    fun observeUsersOffline(): LiveData<PagedList<ResultX>> = repository.observeLocalPagedSets()
-
-    init {
-        retryRequest.value = true
-    }
-
-    fun observeUsersOnline(): LiveData<PagedList<ResultX>> = repository.observeRemotePagedSets()
+    fun observeUsersOffline(): LiveData<PagedList<ResultX>> = offlineDataWatcher
+    fun observeUsersOnline(): LiveData<PagedList<ResultX>> = onlineDataWatcher
     fun observeLoadingStatus(): LiveData<Boolean> = repository.getLoadingStatus()
 
 
