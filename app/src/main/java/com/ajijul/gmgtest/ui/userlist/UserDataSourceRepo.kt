@@ -1,6 +1,8 @@
 package com.ajijul.gmgtest.ui.userlist
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.ajijul.gmgtest.db.UserDAO
 import com.ajijul.gmgtest.helper.Utils
@@ -23,6 +25,13 @@ class UserDataSourceRepo @Inject constructor(
 
     private val job = Job()
     private var coroutineIOScope: CoroutineScope? = CoroutineScope(Dispatchers.IO + job)
+    private lateinit var isLoading: MutableLiveData<Boolean>
+
+    init {
+
+        isLoading = MutableLiveData()
+    }
+
     override fun loadInitial(
         params: LoadInitialParams<String>,
         callback: LoadInitialCallback<String, ResultX>
@@ -54,10 +63,12 @@ class UserDataSourceRepo @Inject constructor(
 
     private fun fetchData(page: String, pageSize: String, callback: (List<ResultX>) -> Unit) {
         coroutineIOScope?.launch {
-
+            isLoading.postValue(true)
             val result = Utils.safeApiCall {
                 apiEndPoint.getArticles(page, pageSize)
             }
+            isLoading.postValue(false)
+
             when (result) {
                 is ResponseWrapper.Success -> {
                     result.data?.body()?.results?.map { it ->
@@ -76,6 +87,8 @@ class UserDataSourceRepo @Inject constructor(
 
         }
     }
+
+    fun getLoadingStatus(): LiveData<Boolean> = isLoading
 
     override fun invalidate() {
         super.invalidate()

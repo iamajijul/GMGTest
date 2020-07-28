@@ -35,14 +35,20 @@ class UserRepositoryImpl @Inject constructor(
         return initializedPagedListBuilder(pageListConfig).build()
     }
 
+    fun getProgressStatus()
+            : LiveData<Boolean> {
+
+        return repo.getLoadingStatus()
+    }
+
+    private val dataSourceFactory = object : DataSource.Factory<String, ResultX>() {
+        override fun create(): DataSource<String, ResultX> {
+            return repo
+        }
+    }
+
     private fun initializedPagedListBuilder(config: PagedList.Config):
             LivePagedListBuilder<String, ResultX> {
-
-        val dataSourceFactory = object : DataSource.Factory<String, ResultX>() {
-            override fun create(): DataSource<String, ResultX> {
-                return repo
-            }
-        }
         return LivePagedListBuilder<String, ResultX>(dataSourceFactory, config)
     }
 }

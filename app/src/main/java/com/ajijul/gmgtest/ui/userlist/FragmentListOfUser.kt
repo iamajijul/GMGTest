@@ -3,6 +3,7 @@ package com.ajijul.gmgtest.ui.userlist
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigator
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ajijul.gmgtest.R
@@ -17,8 +18,8 @@ import kotlinx.android.synthetic.main.fragment_list_of_user.*
 class FragmentListOfUser : BaseFragment(R.layout.fragment_list_of_user),
     NetworkConnectivityListener {
 
-    lateinit var userAdapter: UsersAdapter
-
+    var userAdapter: UsersAdapter? = null
+    private var rootView: View? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpOurRecyclerView()
@@ -28,26 +29,32 @@ class FragmentListOfUser : BaseFragment(R.layout.fragment_list_of_user),
     private fun observerOfflineData() {
         viewModel.observeUsersOffline().observe(viewLifecycleOwner, Observer {
             it?.let {
-                userAdapter.submitList(it)
+                userAdapter?.submitList(it)
             }
         })
     }
 
     private fun observerNetworkData() {
-        handleProgress(true)
         viewModel.observeUsersOnline().observe(viewLifecycleOwner, Observer {
+            it?.let {
 
-                    handleProgress(false)
-                    it?.let {
-                        userAdapter.submitList(it)
-                    }
+                userAdapter?.submitList(it)
+            }
+
+        })
+        viewModel.observeLoadingStatus().observe(viewLifecycleOwner, Observer {
+
+            if (it)handleProgress(true) else handleProgress(false)
 
         })
     }
 
     private fun setUpOurRecyclerView() {
-        userAdapter = UsersAdapter()
-        userAdapter.setOnClickListener {
+
+        if (userAdapter == null)
+            userAdapter = UsersAdapter()
+
+        userAdapter?.setOnClickListener {
             viewModel.setSelectedUser(it)
             findNavController().navigate(R.id.action_fragmentListOfArticles_to_fragmentUserDetails)
 
@@ -67,13 +74,17 @@ class FragmentListOfUser : BaseFragment(R.layout.fragment_list_of_user),
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
+
     override fun networkConnectivityChanged(event: Event) {
         when (event) {
             is Event.ConnectivityEvent -> if (event.isConnected) {
                 observerNetworkData()
             } else {
                 messageHandlerImp.showSnackErrorWithAction(
-                    mainView,
+                    mainView ?: return,
                     R.string.ok,
                     R.string.offlineMesssage
                 ) {

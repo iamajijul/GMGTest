@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_graph"
     app:startDestination="@id/fragmentListOfArticles">
 
     <fragment
         android:id="@+id/fragmentListOfArticles"
         android:name="com.ajijul.gmgtest.ui.userlist.FragmentListOfUser"
-        android:label="FragmentListOfArticles" >
+        android:label="FragmentListOfArticles">
         <action
             android:id="@+id/action_fragmentListOfArticles_to_fragmentUserDetails"
-            app:destination="@id/fragmentUserDetails" />
+            app:destination="@id/fragmentUserDetails"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
     </fragment>
     <fragment
         android:id="@+id/fragmentUserDetails"
         android:name="com.ajijul.gmgtest.ui.userlist.details.FragmentUserDetails"
-        android:label="FragmentUserDetails" />
+        android:label="FragmentUserDetails">
+
+    </fragment>
 </navigation>
