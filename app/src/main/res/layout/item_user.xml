@@ -23,8 +23,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:minHeight="150dp">
+            android:background="@android:color/white">
 
             <ImageView
                 android:id="@+id/ivImageView"
@@ -42,7 +41,7 @@
                 android:id="@+id/tvTitle"
                 name="@{user.name}"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:background="@color/transparentBlack"
                 android:ellipsize="end"
                 android:maxLines="3"
@@ -61,8 +60,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/transparentBlack"
                 android:paddingStart="@dimen/layoutMargin"
-                android:textAllCaps="true"
                 android:text="@{user.gender}"
+                android:textAllCaps="true"
                 android:textColor="@android:color/white"
                 android:textStyle="italic|bold"
                 app:layout_constraintBottom_toTopOf="@+id/tvEmail"
