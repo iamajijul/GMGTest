@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.ajijul.gmgtest.network.models.ResultX" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/layoutMargin"
+        android:layout_marginTop="@dimen/layoutMargin"
+        android:layout_marginEnd="@dimen/layoutMargin"
+        android:padding="8dp"
+        app:cardCornerRadius="@dimen/cardCorner"
+        app:cardElevation="@dimen/card_elevation"
+        app:cardPreventCornerOverlap="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:minHeight="150dp">
+
+            <ImageView
+                android:id="@+id/ivImageView"
+                image="@{user.userImageUrlString}"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/tvTitle"
+                name="@{user.name}"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/transparentBlack"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:padding="@dimen/layoutMargin"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/tvGender"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvGender"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/transparentBlack"
+                android:paddingStart="@dimen/layoutMargin"
+                android:text="@{user.gender}"
+                android:textColor="@android:color/white"
+                android:textStyle="italic|bold"
+                app:layout_constraintBottom_toTopOf="@+id/tvEmail"
+                app:layout_constraintEnd_toEndOf="@+id/ivImageView"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/transparentBlack"
+                android:paddingStart="@dimen/layoutMargin"
+                android:paddingBottom="@dimen/layoutMargin"
+                android:text="@{user.email}"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/ivImageView"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layoutMargin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_next" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

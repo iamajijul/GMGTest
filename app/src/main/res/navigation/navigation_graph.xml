@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation_graph"
+    app:startDestination="@id/fragmentListOfArticles">
+
+    <fragment
+        android:id="@+id/fragmentListOfArticles"
+        android:name="com.ajijul.gmgtest.ui.userlist.FragmentListOfUser"
+        android:label="FragmentListOfArticles" >
+        <action
+            android:id="@+id/action_fragmentListOfArticles_to_fragmentUserDetails"
+            app:destination="@id/fragmentUserDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentUserDetails"
+        android:name="com.ajijul.gmgtest.ui.userlist.details.FragmentUserDetails"
+        android:label="FragmentUserDetails" />
+</navigation>

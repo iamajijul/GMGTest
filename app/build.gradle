@@ -1,0 +1,140 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'dagger.hilt.android.plugin'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.1"
+
+    defaultConfig {
+        applicationId "com.ajijul.gmgtest"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+//        pickFirst "META-INF/DEPENDENCIES"
+        exclude "META-INF/DEPENDENCIES"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    buildFeatures {
+        dataBinding = true
+        // for view binding :
+        // viewBinding = true
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+    packagingOptions {
+        pickFirst 'META-INF/*'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(path: ':network_monitoring')
+    implementation deps.kotlin.stdlib
+    implementation deps.android.appcompat
+    implementation deps.android.core
+    implementation deps.android.constraint_layout
+    testImplementation deps.android.junit
+    testImplementation deps.other.json
+    androidTestImplementation deps.android.junit_ext
+    androidTestImplementation deps.android.test_rule
+    androidTestImplementation deps.android.test_runner
+    androidTestImplementation deps.android.espresso
+    androidTestImplementation deps.android.espresso_contrib
+    implementation deps.android.espresso_resource
+
+    // Material Design
+    implementation deps.google.google_material
+
+
+    // Room
+    implementation deps.ac.room_runtime
+    kapt deps.ac.room_compiler
+
+    // Kotlin Extensions and Coroutines support for Room
+    implementation deps.ac.room_ktx
+
+    // Coroutines
+    implementation deps.kotlin.coroutine_core
+    implementation deps.kotlin.coroutine_android
+    implementation deps.kotlin.coroutine_test
+
+
+    //Life Cycle ViewModel
+    implementation deps.ac.lifecycle_viewmodel
+
+    // Life Cycle Runtime
+    implementation deps.ac.lifecycle_runtime
+
+    // Life Cycle LiveData
+    implementation deps.ac.lifecycle_livedata
+
+    //lifecycle Extension
+    implementation deps.ac.lifecycle
+
+    //Pagging
+    implementation deps.ac.pagging_runtime
+
+    // Navigation Components
+    implementation deps.ac.navigation_fragment
+    implementation deps.ac.navigation_ui
+
+
+    // Retrofit
+    implementation deps.squareup.retrofit
+    implementation deps.squareup.gson_converter
+    implementation deps.squareup.logger
+
+    // Glide
+    implementation deps.glide.glide
+    kapt deps.glide.glide_compiler
+
+    // Activity KTX for viewModels()
+    implementation deps.kotlin.activity_viewmodel_ktx
+
+    //Dagger - Hilt
+    implementation deps.dagger.dagger_android_hilt
+    kapt deps.dagger.dagger_android_hilt_compiler
+
+    implementation deps.dagger.hilt_viewModel
+    kapt deps.dagger.hilt_compiler
+
+    // Timber
+    implementation deps.other.timber
+    implementation deps.other.mockito
+
+    // Mockk.io
+    def mockk_version = "1.9.3"
+    androidTestImplementation "io.mockk:mockk-android:$mockk_version"
+
+//    /*
+//     * Step 1: Add the paging library
+//     */
+//    implementation 'android.arch.paging:runtime:1.0.0'
+
+}
+kapt {
+    correctErrorTypes true
+}

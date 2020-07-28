@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">GMGTest</string>
+    <string name="retry_text">Retry</string>
+    <string name="successMessage">Successfully fetched</string>
+    <string name="errorMessage">Error</string>
+    <string name="ok">Ok</string>
+    <string name="offlineMesssage">Check device internet connection.</string>
+    <string name="noAppFound">No application found</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_elevation">6dp</dimen>
+    <dimen name="layoutMargin">20dp</dimen>
+    <dimen name="cardCorner">5dp</dimen>
+    <dimen name="titleTextSize">35sp</dimen>
+    <dimen name="genderTextSize">20sp</dimen>
+    <dimen name="emailText">15sp</dimen>
+</resources>
