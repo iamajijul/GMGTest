@@ -26,7 +26,7 @@ class UserViewModel @ViewModelInject constructor(private var repository: UserRep
     }
 
     fun observeUsersOnline(): LiveData<PagedList<ResultX>> = repository.observeRemotePagedSets()
-    fun observeLoadingStatus(): LiveData<Boolean> = repository.getProgressStatus()
+    fun observeLoadingStatus(): LiveData<Boolean> = repository.getLoadingStatus()
 
 
     fun setSelectedUser(user: ResultX) {

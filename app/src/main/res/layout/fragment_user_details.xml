@@ -1,78 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="androidx.lifecycle.MutableLiveData" />
+
         <variable
             name="user"
             type="MutableLiveData&lt;com.ajijul.gmgtest.network.models.ResultX>" />
     </data>
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:minHeight="150dp">
+
+        <ImageView
+            android:id="@+id/ivImageView"
+            image="@{user.userImageUrlString}"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:minHeight="150dp">
-
-            <ImageView
-                android:id="@+id/ivImageView"
-                image="@{user.userImageUrlString}"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-            <TextView
-                android:id="@+id/tvTitle"
-                name="@{user.name}"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/transparentBlack"
-                android:ellipsize="end"
-                android:maxLines="3"
-                android:padding="@dimen/layoutMargin"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/titleTextSize"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/ivImageView"
-                tools:layout_editor_absoluteX="0dp" />
+        <TextView
+            android:id="@+id/tvTitle"
+            name="@{user.name}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:padding="@dimen/layoutMargin"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/titleTextSize"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/ivImageView"
+            tools:layout_editor_absoluteX="0dp" />
 
-            <TextView
-                android:id="@+id/tvGender"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/transparentBlack"
-                android:paddingStart="@dimen/layoutMargin"
-                android:text="@{user.gender}"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/genderTextSize"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+        <TextView
+            android:id="@+id/tvGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/layoutMargin"
+            android:text="@{user.gender}"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/genderTextSize"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
-            <TextView
-                android:id="@+id/tvEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/transparentBlack"
-                android:paddingStart="@dimen/layoutMargin"
-                android:paddingBottom="@dimen/layoutMargin"
-                android:text="@{user.email}"
-                android:textStyle="bold|italic"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/emailText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvGender" />
+        <TextView
+            android:id="@+id/tvMobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layoutMargin"
+            android:layout_marginStart="@dimen/layoutMargin"
+            android:text="@{user.phone}"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/emailText"
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvGender" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/layoutMargin"
+            android:paddingBottom="@dimen/layoutMargin"
+            android:text="@{user.email}"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/emailText"
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvMobile" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

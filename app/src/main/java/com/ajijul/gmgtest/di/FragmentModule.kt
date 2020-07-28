@@ -35,11 +35,11 @@ object FragmentModule {
 
     @Provides
     fun provideUserRepository(
-        repo: UserDataSourceRepo,
+        api: UserAPIEndPoint,
         pageConfig: PagedList.Config,
         dao: UserDAO
     ): UserRepositoryImpl =
-        UserRepositoryImpl(repo = repo, pageListConfig = pageConfig, dao = dao)
+        UserRepositoryImpl(api, pageListConfig = pageConfig, dao = dao)
 
 
 }

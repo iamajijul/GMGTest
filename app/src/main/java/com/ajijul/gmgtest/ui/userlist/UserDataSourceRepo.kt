@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class UserDataSourceRepo @Inject constructor(
+open class UserDataSourceRepo @Inject constructor(
     var apiEndPoint: UserAPIEndPoint,
     var dao: UserDAO
 ) :

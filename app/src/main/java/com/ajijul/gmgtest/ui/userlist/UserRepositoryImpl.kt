@@ -14,10 +14,10 @@ import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
-    var repo: UserDataSourceRepo,
+     apiEndPoint: UserAPIEndPoint,
     var pageListConfig: PagedList.Config,
-    var dao: UserDAO
-) {
+     dao: UserDAO
+) : UserDataSourceRepo(apiEndPoint,dao) {
 
 
     fun observeLocalPagedSets(): LiveData<PagedList<ResultX>> {
@@ -35,15 +35,10 @@ class UserRepositoryImpl @Inject constructor(
         return initializedPagedListBuilder(pageListConfig).build()
     }
 
-    fun getProgressStatus()
-            : LiveData<Boolean> {
-
-        return repo.getLoadingStatus()
-    }
 
     private val dataSourceFactory = object : DataSource.Factory<String, ResultX>() {
         override fun create(): DataSource<String, ResultX> {
-            return repo
+            return this@UserRepositoryImpl
         }
     }
 
